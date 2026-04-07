@@ -1,3 +1,8 @@
+declare module '*.md' {
+  const content: string;
+  export default content;
+}
+
 declare namespace NodeJS {
   interface ProcessEnv {
     NODE_ENV: string;

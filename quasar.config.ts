@@ -11,7 +11,7 @@ export default defineConfig((/* ctx */) => {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
-    boot: ['i18n'],
+    boot: ['i18n', 'settings'],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#css
     css: ['app.scss'],
@@ -37,6 +37,9 @@ export default defineConfig((/* ctx */) => {
         node: 'node22',
       },
 
+      // GitHub Pages project site base path
+      publicPath: process.env.NODE_ENV === 'production' ? '/ethos-de-sprawl/' : '/',
+
       typescript: {
         strict: true,
         vueShim: true,
@@ -50,7 +53,6 @@ export default defineConfig((/* ctx */) => {
 
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
-      // publicPath: '/',
       // analyze: true,
       // env: {},
       // rawDefine: {}
@@ -74,13 +76,27 @@ export default defineConfig((/* ctx */) => {
           },
           { server: false },
         ],
+        [
+          'unplugin-auto-import/vite',
+          {
+            imports: ['vue', 'vue-router', 'vue-i18n', 'pinia', 'vue/macros'],
+            dts: 'src/auto-imports.d.ts',
+            dirs: ['src/composables', 'src/models', 'src/stores'],
+            vueTemplate: true,
+            eslintrc: {
+              enabled: true, // Default `false`
+              filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
+              globalsPropValue: true, // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
+            },
+          },
+        ],
       ],
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#devserver
     devServer: {
       // https: true,
-      open: true, // opens browser window automatically
+      open: false, // opens browser window automatically
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#framework
