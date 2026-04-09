@@ -77,7 +77,7 @@
       </q-item-section>
       <q-item-section>{{ $t(score.label) }}</q-item-section>
     </q-item>
-    <q-item-label>
+    <q-item-label class="q-mt-md">
       <span class="q-ml-md">{{ $t('population_legend') }}</span>
     </q-item-label>
     <q-item v-for="population in populationColors" :key="population.color">

@@ -24,6 +24,9 @@ export class DeSprawl2022LayerManager extends LayerManager<FilterParams> {
       type: 'fill',
       source: 'desprawl2022',
       'source-layer': 'desprawl2022',
+      layout: {
+        visibility: 'none',
+      },
       paint: {
         'fill-color': [
           'interpolate',

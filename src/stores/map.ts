@@ -16,7 +16,7 @@ export const useMapStore = defineStore('map', () => {
 
   const layerSelections: LayerSelection[] = layerManagers.map((lm) => ({
     id: lm.getId(),
-    visible: true,
+    visible: lm.getId() === 'desprawl2100', // only the 2100 layer is visible by default
   }));
 
   /**
