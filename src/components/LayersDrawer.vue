@@ -48,6 +48,22 @@
         <span class="text-help">{{ $t('total_score_help') }}</span>
       </q-item-section>
     </q-item>
+    <q-item>
+      <q-item-section>
+        <span>{{ $t('population') }}</span>
+        <q-range
+          v-model="filtersStore.population"
+          :min="0"
+          :max="1000"
+          :step="1"
+          label
+          snap
+          color="primary"
+          @change="onUpdatedFilter"
+        />
+        <span class="text-help">{{ $t('population_help') }}</span>
+      </q-item-section>
+    </q-item>
     <q-item-label header class="text-h6">
       <q-icon name="info" class="q-pb-xs" />
       <span class="q-ml-sm">{{ $t('legends') }}</span>
@@ -60,6 +76,15 @@
         <q-avatar :style="`background-color: ${score.color}`" text-color="black" />
       </q-item-section>
       <q-item-section>{{ $t(score.label) }}</q-item-section>
+    </q-item>
+    <q-item-label>
+      <span class="q-ml-md">{{ $t('population_legend') }}</span>
+    </q-item-label>
+    <q-item v-for="population in populationColors" :key="population.color">
+      <q-item-section avatar>
+        <q-avatar :style="`background-color: ${population.color}`" text-color="black" />
+      </q-item-section>
+      <q-item-section>{{ $t(population.label) }}</q-item-section>
     </q-item>
   </q-list>
 </template>
@@ -86,6 +111,17 @@ const scoreColors = [
   {
     color: '#2DC4B2',
     label: '0',
+  },
+];
+
+const populationColors = [
+  {
+    color: '#000000',
+    label: '> 500',
+  },
+  {
+    color: '#888888',
+    label: '50',
   },
 ];
 
