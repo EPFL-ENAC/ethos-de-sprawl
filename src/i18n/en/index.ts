@@ -2,22 +2,21 @@
 // so you can safely delete all default props below
 
 export default {
-  app_title: 'App Title',
+  app_title: 'Desprawl 2100',
   error_not_found: 'Oops. Nothing here...',
   filters: 'Filters',
   it4r_contrib: 'UI/UX design, application development and deployment',
   layer: {
-    earthquakes: 'Earthquakes',
+    desprawl2100: 'De-Sprawl 2100',
   },
   layers: 'Layers',
   legends: 'Legends',
   home: 'Home',
   introduction: 'Introduction',
-  magnitudes: 'Magnitudes',
-  magnitudes_help: 'Select the range of magnitudes.',
-  number_of_earthquakes: 'Number of earthquakes',
+  total_score: 'Total Score',
+  total_score_help: 'Select the range of total scores.',
+  total_score_legend: 'Total Score Legend',
   reset_filters: 'Reset filters',
   resources: 'Resources',
   source_code: 'Source Code',
-  with_tsunami: 'With tsunami'
 };

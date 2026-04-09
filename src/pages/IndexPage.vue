@@ -1,6 +1,6 @@
 <template>
   <q-page class="map-page">
-    <maplibre-map position geocoder :zoom="2" @map:loaded="onMapLoaded" @map:click="onMapClick" />
+    <maplibre-map position geocoder :zoom="12" @map:loaded="onMapLoaded" @map:click="onMapClick" />
   </q-page>
 </template>
 
@@ -21,10 +21,9 @@ import type { Map, MapMouseEvent } from 'maplibre-gl';
 const mapStore = useMapStore();
 const filtersStore = useFiltersStore();
 
-async function onMapLoaded(map: Map) {
-  await mapStore.initLayers(map).then(() => {
-    mapStore.applyFilters(filtersStore.asParams());
-  });
+function onMapLoaded(map: Map) {
+  mapStore.initLayers(map);
+  mapStore.applyFilters(filtersStore.asParams());
 }
 
 function onMapClick(event: MapMouseEvent) {

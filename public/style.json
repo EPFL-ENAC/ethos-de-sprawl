@@ -4,7 +4,7 @@
   "sources": {
     "osm": {
       "type": "raster",
-      "tiles": ["https://tile.osm.ch/osm-swiss-style/{z}/{x}/{y}.png"],
+      "tiles": ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
       "tileSize": 256,
       "minzoom": 0,
       "maxzoom": 20
@@ -12,12 +12,9 @@
   },
   "glyphs": "https://orangemug.github.io/font-glyphs/glyphs/{fontstack}/{range}.pbf",
   "layers": [
-    { "id": "classic",
-      "type": "raster",
-      "source": "osm",
-      "layout": { "visibility": "none" }
-    },
-    { "id": "light",
+    { "id": "classic", "type": "raster", "source": "osm", "layout": { "visibility": "none" } },
+    {
+      "id": "light",
       "type": "raster",
       "source": "osm",
       "paint": {
@@ -26,7 +23,8 @@
       },
       "layout": { "visibility": "visible" }
     },
-    { "id": "dark",
+    {
+      "id": "dark",
       "type": "raster",
       "source": "osm",
       "paint": {

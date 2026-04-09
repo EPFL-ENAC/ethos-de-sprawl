@@ -1,8 +1,8 @@
 {
-  "name": "de-sprawl",
+  "name": "desprawl",
   "version": "0.0.1",
-  "description": "Webmap of De-sprawl Switzerland project by ETHOS lab",
-  "productName": "ETHOS De-sprawl",
+  "description": "Webmap of Desprawl Switzerland project by ETHOS lab",
+  "productName": "ETHOS Desprawl",
   "author": "ymarcon <yannick.marcon@epfl.ch>",
   "type": "module",
   "private": true,

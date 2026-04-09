@@ -39,10 +39,15 @@ import {
   ScaleControl,
   type LngLatLike,
   type StyleSpecification,
+  addProtocol,
 } from 'maplibre-gl';
 import { DivControl } from 'src/utils/control';
 import { geocoderApi } from 'src/utils/geocoder';
 import { type Settings } from 'src/stores/settings';
+import { Protocol } from 'pmtiles';
+
+const protocol = new Protocol();
+addProtocol('pmtiles', protocol.tile);
 
 interface Props {
   styleSpec?: string | StyleSpecification | undefined;

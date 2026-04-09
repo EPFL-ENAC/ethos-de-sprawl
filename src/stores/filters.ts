@@ -1,34 +1,31 @@
 import { defineStore } from 'pinia';
 
 export type FilterParams = {
-  magnitudes: [number, number]
-  tsunami: boolean | null
-}
+  totalScore: [number, number];
+};
 
-const DEFAULT_MAGNITUDES = { min: 1, max: 10 };
+const DEFAULT_TOTAL_SCORE = { min: 0, max: 100 };
 
-export const useFiltersStore = defineStore('filters', () => {
+export const useFiltersStore = defineStore(
+  'filters',
+  () => {
+    const totalScore = ref({ ...DEFAULT_TOTAL_SCORE });
 
-  const magnitudes = ref({...DEFAULT_MAGNITUDES});
-  const tsunami = ref(null);
-
-  function reset() {
-    magnitudes.value = {...DEFAULT_MAGNITUDES};
-    tsunami.value = null;
-  }
-
-  function asParams(): FilterParams {
-    return {
-      magnitudes: [magnitudes.value.min, magnitudes.value.max],
-      tsunami: tsunami.value
+    function reset() {
+      totalScore.value = { ...DEFAULT_TOTAL_SCORE };
     }
-  }
 
-  return {
-    magnitudes,
-    tsunami,
-    reset,
-    asParams,
-  }
+    function asParams(): FilterParams {
+      return {
+        totalScore: [totalScore.value.min, totalScore.value.max],
+      };
+    }
 
-}, { persist: true });
+    return {
+      totalScore,
+      reset,
+      asParams,
+    };
+  },
+  { persist: true },
+);

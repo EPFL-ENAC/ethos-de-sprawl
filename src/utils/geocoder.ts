@@ -7,7 +7,7 @@ import type {
 import type { Feature, FeatureCollection } from 'geojson';
 
 // restrict by country code and/or view box
-const countryCode: string | undefined = undefined; //'ch'
+const countryCode: string | undefined = 'ch';
 const viewBox: string | undefined = undefined; // '5.80,46.40,6.25,46.10'
 
 function handleNominatimResponse(geojson: FeatureCollection): CarmenGeojsonFeature[] {

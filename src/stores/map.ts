@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { EarthquakesLayerManager } from 'src/layers/earthquakes';
+import { DeSprawl2100LayerManager } from 'src/layers/desprawl2100';
 import { type Map } from 'maplibre-gl';
 import { type FilterParams } from 'src/stores/filters';
 
@@ -11,7 +11,7 @@ export type LayerSelection = {
 export const useMapStore = defineStore('map', () => {
   const map = ref<Map>();
 
-  const layerManagers = [new EarthquakesLayerManager()];
+  const layerManagers = [new DeSprawl2100LayerManager()];
 
   const layerSelections: LayerSelection[] = layerManagers.map((lm) => ({
     id: lm.getId(),
@@ -61,15 +61,13 @@ export const useMapStore = defineStore('map', () => {
    * @param mapInstance the map instance
    * @returns
    */
-  async function initLayers(mapInstance: Map) {
+  function initLayers(mapInstance: Map) {
     map.value = mapInstance;
-    return Promise.all(
-      layerSelections.map((layer) => {
-        const manager = getLayerManager(layer.id);
-        if (!manager) return Promise.resolve();
-        return manager.append(mapInstance);
-      }),
-    );
+    layerSelections.map((layer) => {
+      const manager = getLayerManager(layer.id);
+      if (!manager) return;
+      manager.append(mapInstance);
+    });
   }
 
   /**

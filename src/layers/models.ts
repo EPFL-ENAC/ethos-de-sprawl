@@ -9,7 +9,7 @@ export abstract class LayerManager<T> {
   /**
    * Add the layer to the map.
    */
-  abstract append(map: Map): Promise<void>;
+  abstract append(map: Map): void;
 
   /**
    * Set the visibility of the layer.
