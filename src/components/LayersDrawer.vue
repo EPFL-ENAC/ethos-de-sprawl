@@ -4,23 +4,73 @@
       <q-icon name="layers" class="q-pb-xs" />
       <span class="q-ml-sm">{{ $t('layers') }}</span>
     </q-item-label>
-    <q-item v-for="layer in mapStore.layerSelections" :key="layer.id" class="q-pl-sm q-pr-sm">
-      <q-item-section>
-        <q-checkbox
-          v-model="layer.visible"
-          :label="$t(`layer.${layer.id}`)"
-          @click="onToggleLayer(layer.id)"
-        />
-      </q-item-section>
-      <q-item-section avatar>
-        <q-btn flat round icon="help_outline" @click="helpStore.toggleHelp(layer.id)" />
-      </q-item-section>
-    </q-item>
-    <q-item-label header>
-      <span class="text-h6">
-        <q-icon name="filter_alt" class="q-pb-xs" />
-        <span class="q-ml-sm">{{ $t('filters') }}</span>
-      </span>
+    <template v-for="layer in mapStore.layerSelections" :key="layer.id">
+      <q-item class="q-pl-sm q-pr-sm">
+        <q-item-section>
+          <q-checkbox
+            v-model="layer.visible"
+            :label="$t(`layer.${layer.id}`)"
+            @click="onToggleLayer(layer.id)"
+          />
+        </q-item-section>
+        <q-item-section avatar>
+          <q-btn flat round icon="help_outline" @click="helpStore.toggleHelp(layer.id)" />
+        </q-item-section>
+      </q-item>
+      <template v-if="layer.id == 'population2022' && layer.visible">
+        <q-item>
+          <q-item-section>
+            <span>{{ $t('population') }}</span>
+            <q-range
+              v-model="filtersStore.population"
+              :min="0"
+              :max="1000"
+              :step="1"
+              label
+              snap
+              color="primary"
+              @change="onUpdatedFilter"
+            />
+            <span class="text-help">{{ $t('population_help') }}</span>
+          </q-item-section>
+        </q-item>
+        <q-item v-for="population in populationColors" :key="population.color">
+          <q-item-section avatar>
+            <q-avatar
+              size="sm"
+              :style="`background-color: ${population.color}`"
+              text-color="black"
+            />
+          </q-item-section>
+          <q-item-section>{{ $t(population.label) }}</q-item-section>
+        </q-item>
+      </template>
+      <template v-if="layer.id == 'desprawl2100' && layer.visible">
+        <q-item>
+          <q-item-section>
+            <span>{{ $t('total_score') }}</span>
+            <q-range
+              v-model="filtersStore.totalScore"
+              :min="0"
+              :max="100"
+              :step="1"
+              label
+              snap
+              color="primary"
+              @change="onUpdatedFilter"
+            />
+            <span class="text-help">{{ $t('total_score_help') }}</span>
+          </q-item-section>
+        </q-item>
+        <q-item v-for="score in scoreColors" :key="score.color">
+          <q-item-section avatar>
+            <q-avatar size="sm" :style="`background-color: ${score.color}`" text-color="black" />
+          </q-item-section>
+          <q-item-section>{{ $t(score.label) }}</q-item-section>
+        </q-item>
+      </template>
+    </template>
+    <q-item>
       <q-btn
         flat
         no-caps
@@ -31,60 +81,6 @@
         @click="onResetFilters"
         class="q-mt-xs q-pl-xs q-pr-xs float-right"
       />
-    </q-item-label>
-    <q-item>
-      <q-item-section>
-        <span>{{ $t('total_score') }}</span>
-        <q-range
-          v-model="filtersStore.totalScore"
-          :min="0"
-          :max="100"
-          :step="1"
-          label
-          snap
-          color="primary"
-          @change="onUpdatedFilter"
-        />
-        <span class="text-help">{{ $t('total_score_help') }}</span>
-      </q-item-section>
-    </q-item>
-    <q-item>
-      <q-item-section>
-        <span>{{ $t('population') }}</span>
-        <q-range
-          v-model="filtersStore.population"
-          :min="0"
-          :max="1000"
-          :step="1"
-          label
-          snap
-          color="primary"
-          @change="onUpdatedFilter"
-        />
-        <span class="text-help">{{ $t('population_help') }}</span>
-      </q-item-section>
-    </q-item>
-    <q-item-label header class="text-h6">
-      <q-icon name="info" class="q-pb-xs" />
-      <span class="q-ml-sm">{{ $t('legends') }}</span>
-    </q-item-label>
-    <q-item-label>
-      <span class="q-ml-md">{{ $t('total_score_legend') }}</span>
-    </q-item-label>
-    <q-item v-for="score in scoreColors" :key="score.color">
-      <q-item-section avatar>
-        <q-avatar :style="`background-color: ${score.color}`" text-color="black" />
-      </q-item-section>
-      <q-item-section>{{ $t(score.label) }}</q-item-section>
-    </q-item>
-    <q-item-label class="q-mt-md">
-      <span class="q-ml-md">{{ $t('population_legend') }}</span>
-    </q-item-label>
-    <q-item v-for="population in populationColors" :key="population.color">
-      <q-item-section avatar>
-        <q-avatar :style="`background-color: ${population.color}`" text-color="black" />
-      </q-item-section>
-      <q-item-section>{{ $t(population.label) }}</q-item-section>
     </q-item>
   </q-list>
 </template>
