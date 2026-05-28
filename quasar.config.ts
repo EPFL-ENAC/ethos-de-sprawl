@@ -37,8 +37,7 @@ export default defineConfig((/* ctx */) => {
         node: 'node22',
       },
 
-      // GitHub Pages project site base path
-      publicPath: process.env.NODE_ENV === 'production' ? '/ethos-de-sprawl/' : '/',
+      publicPath: '/',
 
       typescript: {
         strict: true,
