@@ -1,0 +1,9 @@
+## Swiss de-sprawl project
+
+This website presents an interactive map-based representation of how Switzerland’s existing built environment could be retrofitted into compact, service-rich, low-impact neighborhoods without relying on continued new construction. The project was developed at EPFL and contributes to [SWICE](https://sweet-swice.ch/), a Swiss research program on sustainable wellbeing in the energy transition.
+
+The purpose of the website is to make the results visible and easy to discuss. Transforming the built environment is foremost a democratic question about land, housing, services, mobility, biodiversity, and what kind of everyday life Switzerland should enable.
+
+Today’s Swiss built habitat creates several interconnected problems. Housing is scarce and expensive, yet most of the 17 million rooms in Switzerland are empty most of the time. Buildings consume large amounts of energy and materials, yet renovation remains too slow. Settlements continue to spread across the landscape, often with low density, fragmented land use, and high dependence on cars. Access to daily services such as food shops, schools, childcare, healthcare, public transport, and green spaces is also highly unequal. These patterns produce high greenhouse gas emissions, ecological damage, avoidable mobility, and unequal wellbeing outcomes.
+
+Building on Nick ([2024](https://doi.org/10.3389/frsus.2024.1375271)), the project explores a different pathway: renovate and reorganize the existing built environment so that everyone can live in high-quality, energy-efficient housing with good access to essential daily services within an 8-minute walk. This includes more flexible and shared spaces, better indoor environmental quality, compact neighborhoods, and the gradual renaturation of built areas that are no longer needed for housing or services. The goal is to examine under which conditions a socially inclusive and ecologically safer Swiss habitat is possible.

@@ -101,16 +101,16 @@ const filtersStore = useFiltersStore();
 
 const scoreColors = [
   {
-    color: '#F28CB1',
+    color: '#440154',
     label: '100',
   },
   {
-    color: '#3BB3C3',
-    label: '50',
+    color: '#21918c',
+    label: '75',
   },
   {
-    color: '#2DC4B2',
-    label: '0',
+    color: '#fde725',
+    label: '50',
   },
 ];
 

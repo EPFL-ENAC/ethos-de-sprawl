@@ -29,12 +29,16 @@ export class DeSprawl2100LayerManager extends LayerManager<FilterParams> {
           'interpolate',
           ['linear'],
           ['get', 'total_score'],
-          0,
-          '#2DC4B2',
           50,
-          '#3BB3C3',
+          '#fde725',
+          62,
+          '#5ec962',
+          75,
+          '#21918c',
+          87,
+          '#3b528b',
           100,
-          '#F28CB1',
+          '#440154',
         ],
         'fill-opacity': 0.8,
       },
@@ -79,7 +83,7 @@ export class DeSprawl2100LayerManager extends LayerManager<FilterParams> {
       const htmlContent = `
       <div class="q-px-sm">
         <div class="text-h6">${name}</div>
-        <p>Total Score: ${fmt(total_score)}</p>
+        <p class="text-body2 q-mt-sm">Total Score: <b>${fmt(total_score)}</b></p>
         <table>
           <tr>
             <th align="right">Max Population</th>

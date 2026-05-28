@@ -13,10 +13,6 @@
       <img src="EPFL_logo.png" style="height: 25px" />
     </a>
     <span class="q-ml-md text-h6">{{ $t('app_title') }}</span>
-    <q-tabs v-if="!$q.screen.lt.sm" shrink stretch active-color="primary" class="q-ml-md">
-      <q-route-tab to="/" :label="$t('home')" exact />
-      <q-route-tab :label="$t('Page1')" to="/page/1" exact />
-    </q-tabs>
     <q-space />
     <span v-if="!$q.screen.lt.md">
       <q-btn
@@ -38,16 +34,6 @@
     <q-btn v-if="$q.screen.lt.md" flat round icon="more_vert">
       <q-popup-proxy>
         <q-list class="bg-white">
-          <q-item v-if="$q.screen.lt.sm" clickable v-close-popup to="/">
-            <q-item-section>
-              <q-item-label>{{ $t('home') }}</q-item-label>
-            </q-item-section>
-          </q-item>
-          <q-item v-if="$q.screen.lt.sm" clickable v-close-popup to="/page/1">
-            <q-item-section>
-              <q-item-label>{{ $t('Page1') }}</q-item-label>
-            </q-item-section>
-          </q-item>
           <q-separator v-if="$q.screen.lt.sm" />
           <q-item clickable v-close-popup @click="showResources = true">
             <q-item-section>
@@ -65,7 +51,7 @@
     <a href="https://www.epfl.ch/labs/ethos/" target="_blank" class="text-h4 epfl"> ETHOS </a>
   </q-toolbar>
 
-  <simple-dialog v-model="showIntro" :title="$t('app_title')" :content="IntroductionMd" />
+  <simple-dialog v-model="showIntro" :content="IntroductionEnMd" />
 
   <simple-dialog v-model="showResources" :title="$t('resources')">
     <q-list separator>
@@ -81,7 +67,7 @@ export default defineComponent({
 });
 </script>
 <script setup lang="ts">
-import IntroductionMd from 'src/assets/introduction.md';
+import IntroductionEnMd from 'src/assets/introduction-en.md';
 import essentialLinks from 'src/assets/links.json';
 import EssentialLink from 'src/components/EssentialLink.vue';
 import SimpleDialog from 'src/components/SimpleDialog.vue';

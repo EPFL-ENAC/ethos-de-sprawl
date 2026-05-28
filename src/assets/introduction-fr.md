@@ -1,0 +1,18 @@
+## Projet Swiss de-sprawl
+
+Ce site web présente une cartographie interactive illustrant comment l'environnement bâti actuel de la Suisse pourrait être réaménagé en quartiers compacts, dotés de nombreux services et à faible impact environnemental, sans recourir à de nouvelles constructions. Ce projet a été développé à l'EPFL et s'inscrit dans le cadre de [SWICE](https://sweet-swice.ch/), un programme de recherche suisse consacré au bien-être durable dans le contexte de la transition énergétique.
+
+Ce site web a pour objectif de rendre les résultats accessibles et faciles à discuter. La transformation de l'environnement bâti est avant tout une question démocratique qui touche au territoire, au logement, aux services, à la mobilité, à la biodiversité et au type de vie quotidienne que la Suisse doit permettre.
+
+L'environnement bâti actuel en Suisse engendre plusieurs problèmes interconnectés. Les logements sont en pénurie et coûtent cher, alors que la plupart des 17 millions de pièces que compte la Suisse restent vides la majeure partie du temps. Les bâtiments consomment d'énormes quantités d'énergie et de matériaux, mais les travaux de rénovation avancent trop lentement. L'urbanisation continue de s'étendre dans le paysage, souvent avec une faible densité, une utilisation fragmentée des sols engendrant une forte dépendance à la voiture. L'accès aux services quotidiens tels que les magasins d'alimentation, les écoles, les structures d'accueil pour les enfants, les soins de santé, les transports publics et les espaces verts est également très inégal. Ces schémas entraînent des émissions élevées de gaz à effet de serre, des impacts sur l'écosystème, plus de mobilité et des inégalités en matière de bien-être.
+
+S'inspirant des travaux de Nick ([2024](https://doi.org/10.3389/frsus.2024.1375271)), le projet explore une autre voie : rénover et réorganiser l'environnement bâti existant afin que chacun puisse vivre dans un logement de qualité et économe en énergie, avec un accès aisé aux services quotidiens essentiels à moins de 8 minutes à pied. Cela implique des espaces plus flexibles et partagés, une meilleure qualité de l'environnement intérieur, des quartiers compacts et la renaturation progressive des zones bâties qui ne sont plus nécessaires pour le logement ou les services. L'objectif est d'examiner dans quelles conditions un habitat suisse socialement inclusif et écologiquement plus sûr est
+possible.
+
+### Brève présentation des cartes et des résultats
+
+Les cartes présentent les résultats de la modélisation à une résolution d'un hectare pour l'ensemble de la Suisse. Les hectares colorés représentent les zones conservées et réaménagées en futurs quartiers de 8 minutes. Leur couleur indique le score d'accessibilité : plus ce score est élevé, plus les services quotidiens essentiels sont proches et faciles d'accès à pied. Les couches de services montrent la répartition modélisée de services tels que les magasins d'alimentation, les écoles, les soins de santé, les structures d'accueil pour enfants et d'autres services de la vie quotidienne.
+
+Les zones sans hectares colorés ne sont pas sélectionnées pour une implantation à long terme dans ce scénario. Leur population est réaffectée vers des zones conservées situées à proximité. Les résultats montrent dans quelle mesure la superficie bâtie, la demande en surface de plancher, l’accessibilité aux services et l’étalement urbain pourraient évoluer dans le cadre de cette voie de transformation.
+
+Ces cartes visent à faciliter le dialogue sur le logement, la mobilité et le bien-être, et à éclairer la future planification démocratique délibérative.

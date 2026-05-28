@@ -2,13 +2,13 @@
 // so you can safely delete all default props below
 
 export default {
-  app_title: 'Desprawl 2100',
+  app_title: 'Swiss De-sprawl',
   error_not_found: 'Oops. Nothing here...',
   filters: 'Filters',
   it4r_contrib: 'UI/UX design, application development and deployment',
   layer: {
-    desprawl2100: 'Desprawl 2100',
-    desprawl2022: 'Desprawl 2022',
+    desprawl2100: 'De-sprawl 2100',
+    population2022: 'Population 2022',
   },
   layers: 'Layers',
   legends: 'Legends',
