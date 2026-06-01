@@ -62,7 +62,7 @@ interface Props {
 }
 const props = withDefaults(defineProps<Props>(), {
   styleSpec: 'style.json',
-  center: (): [number, number] => [6.566547557495834, 46.521590682027536],
+  center: (): [number, number] => [7.8849, 46.8819],
   zoom: 12,
   minZoom: 0,
   position: false,

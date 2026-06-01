@@ -1,6 +1,6 @@
 <template>
   <q-page class="map-page">
-    <maplibre-map position geocoder :zoom="12" @map:loaded="onMapLoaded" @map:click="onMapClick" />
+    <maplibre-map position geocoder :zoom="8" @map:loaded="onMapLoaded" @map:click="onMapClick" />
   </q-page>
 </template>
 

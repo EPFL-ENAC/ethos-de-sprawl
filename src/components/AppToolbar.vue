@@ -10,9 +10,11 @@
       @click="toggleLeftDrawer"
     />
     <a href="https://epfl.ch" target="_blank" class="q-mt-sm">
-      <img src="EPFL_logo.png" style="height: 25px" />
+      <img src="EPFL_logo.png" :style="$q.screen.lt.md ? 'height: 15px' : 'height: 20px'" />
     </a>
-    <span class="q-ml-md text-h6">{{ $t('app_title') }}</span>
+    <span class="q-ml-md" :class="$q.screen.lt.md ? 'text-bold' : 'text-h6'">{{
+      $t('app_title')
+    }}</span>
     <q-space />
     <span v-if="!$q.screen.lt.md">
       <q-btn
@@ -48,7 +50,15 @@
         </q-list>
       </q-popup-proxy>
     </q-btn>
-    <a href="https://www.epfl.ch/labs/ethos/" target="_blank" class="text-h4 epfl"> ETHOS </a>
+    <template v-if="!$q.screen.lt.md">
+      <a href="https://www.epfl.ch/labs/ethos/" target="_blank" class="text-h5 epfl"> ETHOS </a>
+      <a href="https://www.epfl.ch/labs/leure/" target="_blank" class="text-h5 epfl on-right">
+        LEURE
+      </a>
+    </template>
+    <a href="https://sweet-swice.ch/" target="_blank" class="text-h5 epfl on-right"
+      ><img src="Sweet-SWICE.jpg" style="height: 25px"
+    /></a>
   </q-toolbar>
 
   <simple-dialog v-model="showIntro" :content="IntroductionEnMd" />

@@ -12,6 +12,18 @@
     "link": "https://www.epfl.ch/labs/ethos"
   },
   {
+    "title": "EPFL LEURE",
+    "caption": "epfl.ch/labs/leure",
+    "icon": "engineering",
+    "link": "https://www.epfl.ch/labs/leure"
+  },
+  {
+    "title": "SWEET-SWICE",
+    "caption": "sweet-swice.ch",
+    "icon": "science",
+    "link": "https://sweet-swice.ch/"
+  },
+  {
     "title": "ENAC IT4R",
     "caption": "go.epfl.ch/it4r",
     "icon": "construction",
