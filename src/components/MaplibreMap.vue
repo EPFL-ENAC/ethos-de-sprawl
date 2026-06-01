@@ -97,6 +97,14 @@ onMounted(() => {
     minZoom: props.minZoom,
     cooperativeGestures: false,
     attributionControl: false,
+    transformRequest: (url, resourceType) => {
+      return {
+        url,
+        headers: {
+          'Referer-policy': 'no-referrer-when-downgrade',
+        },
+      };
+    },
   };
 
   if (props.maxZoom !== undefined) {
