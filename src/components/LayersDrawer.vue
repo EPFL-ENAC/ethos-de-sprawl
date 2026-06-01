@@ -115,12 +115,12 @@ const scoreColors = [
 
 const populationColors = [
   {
-    color: '#000000',
+    color: '#67000d',
     label: '> 500',
   },
   {
-    color: '#888888',
-    label: '50',
+    color: '#dd664f',
+    label: '100',
   },
 ];
 
