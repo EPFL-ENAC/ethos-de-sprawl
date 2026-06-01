@@ -19,6 +19,17 @@ export const useMapStore = defineStore('map', () => {
     visible: lm.getId() === 'desprawl2100', // only the 2100 layer is visible by default
   }));
 
+  function setVisibleLayer(id: string) {
+    // Set the visibility of the selected layer to true and all other layers to false
+    layerSelections.forEach((layer) => {
+      layer.visible = layer.id === id;
+      const manager = getLayerManager(layer.id);
+      if (manager && map.value) {
+        manager.setVisible(map.value, layer.visible);
+      }
+    });
+  }
+
   /**
    * Find a layer selection state by its identifier.
    * @param id the layer selection state
@@ -86,5 +97,6 @@ export const useMapStore = defineStore('map', () => {
     applyFilters,
     applyLayerVisibility,
     initLayers,
+    setVisibleLayer,
   };
 });

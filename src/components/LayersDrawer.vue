@@ -7,8 +7,9 @@
     <template v-for="layer in mapStore.layerSelections" :key="layer.id">
       <q-item class="q-pl-sm q-pr-sm">
         <q-item-section>
-          <q-checkbox
-            v-model="layer.visible"
+          <q-radio
+            v-model="currentLayer"
+            :val="layer.id"
             :label="$t(`layer.${layer.id}`)"
             @click="onToggleLayer(layer.id)"
           />
@@ -17,7 +18,7 @@
           <q-btn flat round icon="help_outline" @click="helpStore.toggleHelp(layer.id)" />
         </q-item-section>
       </q-item>
-      <template v-if="layer.id == 'population2022' && layer.visible">
+      <template v-if="currentLayer == 'population2022' && layer.visible">
         <q-item>
           <q-item-section>
             <span>{{ $t('population') }}</span>
@@ -45,7 +46,7 @@
           <q-item-section>{{ $t(population.label) }}</q-item-section>
         </q-item>
       </template>
-      <template v-if="layer.id == 'desprawl2100' && layer.visible">
+      <template v-if="currentLayer == 'desprawl2100' && layer.visible">
         <q-item>
           <q-item-section>
             <span>{{ $t('total_score') }}</span>
@@ -95,6 +96,8 @@ const mapStore = useMapStore();
 const helpStore = useHelpStore();
 const filtersStore = useFiltersStore();
 
+const currentLayer = ref<string | null>('desprawl2100');
+
 const scoreColors = [
   {
     color: '#440154',
@@ -122,7 +125,7 @@ const populationColors = [
 ];
 
 function onToggleLayer(layerId: string) {
-  mapStore.applyLayerVisibility(layerId);
+  mapStore.setVisibleLayer(layerId);
   onUpdatedFilter();
 }
 
