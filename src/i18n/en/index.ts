@@ -18,7 +18,7 @@ export default {
   total_score_help: 'Select the range of total scores.',
   total_score_legend: 'Total score (2100)',
   population: 'Population (2022)',
-  population_help: 'Select the range of population density.',
+  population_help: 'Select the range of population density per hectare.',
   population_legend: 'Population density (2022)',
   reset_filters: 'Reset filters',
   resources: 'Resources',

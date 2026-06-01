@@ -116,11 +116,15 @@ const scoreColors = [
 const populationColors = [
   {
     color: '#67000d',
-    label: '> 500',
+    label: '> 500 per hectare',
+  },
+  {
+    color: '#a2332e',
+    label: '300 per hectare',
   },
   {
     color: '#dd664f',
-    label: '100',
+    label: '100 per hectare',
   },
 ];
 
