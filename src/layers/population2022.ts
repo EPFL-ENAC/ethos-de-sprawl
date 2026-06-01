@@ -4,7 +4,7 @@ import { LayerManager } from 'src/layers/models';
 import type { FilterParams } from 'src/stores/filters';
 
 const cdnUrl = 'https://enacit4r-cdn.epfl.ch';
-const mapsUrl = `${cdnUrl}/ehtos-de-sprawl/2026-04-08T08:49/data`;
+const mapsUrl = `${cdnUrl}/ehtos-de-sprawl/2026-06-01T10:38/data`;
 
 const PMTILES_2022_URL = `${mapsUrl}/de-sprawl-2022.pmtiles`;
 
