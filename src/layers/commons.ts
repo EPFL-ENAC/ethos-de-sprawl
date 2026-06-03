@@ -5,7 +5,7 @@ import type { FilterParams } from 'src/stores/filters';
 import { getColorScalePaint } from 'src/utils/constants';
 
 const cdnUrl = 'https://enacit4r-cdn.epfl.ch';
-const mapsUrl = `${cdnUrl}/ehtos-de-sprawl/2026-06-03T15:55/data`;
+const mapsUrl = `${cdnUrl}/ehtos-de-sprawl/2026-06-03T17:20/data`;
 
 export class DeSprawlLayerManager extends LayerManager<FilterParams> {
   getId(): string {
