@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { DeSprawl2100LayerManager } from 'src/layers/desprawl2100';
-import { Population2022LayerManager } from 'src/layers/population2022';
+import { DeSprawl2023LayerManager } from 'src/layers/desprawl2023';
 import { type Map } from 'maplibre-gl';
 import { type FilterParams } from 'src/stores/filters';
 
@@ -9,14 +9,16 @@ export type LayerSelection = {
   visible: boolean;
 };
 
+export const DEFAULT_LAYER = 'desprawl2100';
+
 export const useMapStore = defineStore('map', () => {
   const map = ref<Map>();
 
-  const layerManagers = [new Population2022LayerManager(), new DeSprawl2100LayerManager()];
+  const layerManagers = [new DeSprawl2023LayerManager(), new DeSprawl2100LayerManager()];
 
   const layerSelections: LayerSelection[] = layerManagers.map((lm) => ({
     id: lm.getId(),
-    visible: lm.getId() === 'desprawl2100', // only the 2100 layer is visible by default
+    visible: lm.getId() === DEFAULT_LAYER, // only the default layer is visible by default
   }));
 
   function setVisibleLayer(id: string) {
@@ -79,6 +81,7 @@ export const useMapStore = defineStore('map', () => {
       const manager = getLayerManager(layer.id);
       if (!manager) return;
       manager.append(mapInstance);
+      manager.setVisible(mapInstance, layer.visible);
     });
   }
 

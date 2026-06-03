@@ -18,59 +18,29 @@
           <q-btn flat round icon="help_outline" @click="helpStore.toggleHelp(layer.id)" />
         </q-item-section>
       </q-item>
-      <template v-if="currentLayer == 'population2022' && layer.visible">
-        <q-item>
-          <q-item-section>
-            <span>{{ $t('population') }}</span>
-            <q-range
-              v-model="filtersStore.population"
-              :min="0"
-              :max="1000"
-              :step="1"
-              label
-              snap
-              color="primary"
-              @change="onUpdatedFilter"
-            />
-            <span class="text-help">{{ $t('population_help') }}</span>
-          </q-item-section>
-        </q-item>
-        <q-item v-for="population in populationColors" :key="population.color">
-          <q-item-section avatar>
-            <q-avatar
-              size="sm"
-              :style="`background-color: ${population.color}`"
-              text-color="black"
-            />
-          </q-item-section>
-          <q-item-section>{{ $t(population.label) }}</q-item-section>
-        </q-item>
-      </template>
-      <template v-if="currentLayer == 'desprawl2100' && layer.visible">
-        <q-item>
-          <q-item-section>
-            <span>{{ $t('total_score') }}</span>
-            <q-range
-              v-model="filtersStore.totalScore"
-              :min="0"
-              :max="100"
-              :step="1"
-              label
-              snap
-              color="primary"
-              @change="onUpdatedFilter"
-            />
-            <span class="text-help">{{ $t('total_score_help') }}</span>
-          </q-item-section>
-        </q-item>
-        <q-item v-for="score in scoreColors" :key="score.color">
-          <q-item-section avatar>
-            <q-avatar size="sm" :style="`background-color: ${score.color}`" text-color="black" />
-          </q-item-section>
-          <q-item-section>{{ $t(score.label) }}</q-item-section>
-        </q-item>
-      </template>
     </template>
+    <q-item>
+      <q-item-section>
+        <span>{{ $t('total_score') }}</span>
+        <q-range
+          v-model="filtersStore.totalScore"
+          :min="0"
+          :max="100"
+          :step="1"
+          label
+          snap
+          color="primary"
+          @change="onUpdatedFilter"
+        />
+        <span class="text-help">{{ $t('total_score_help') }}</span>
+      </q-item-section>
+    </q-item>
+    <q-item v-for="[label, color] in Object.entries(COLOR_SCALE)" :key="color">
+      <q-item-section avatar>
+        <q-avatar size="sm" :style="`background-color: ${color}`" text-color="black" />
+      </q-item-section>
+      <q-item-section>{{ $t(label) }}</q-item-section>
+    </q-item>
     <q-item>
       <q-btn
         flat
@@ -86,47 +56,14 @@
   </q-list>
 </template>
 
-<script lang="ts">
-export default defineComponent({
-  name: 'LayersDrawer',
-});
-</script>
 <script setup lang="ts">
+import { COLOR_SCALE } from 'src/utils/constants';
+
 const mapStore = useMapStore();
 const helpStore = useHelpStore();
 const filtersStore = useFiltersStore();
 
-const currentLayer = ref<string | null>('desprawl2100');
-
-const scoreColors = [
-  {
-    color: '#440154',
-    label: '100',
-  },
-  {
-    color: '#21918c',
-    label: '75',
-  },
-  {
-    color: '#fde725',
-    label: '50',
-  },
-];
-
-const populationColors = [
-  {
-    color: '#67000d',
-    label: '> 500 per hectare',
-  },
-  {
-    color: '#a2332e',
-    label: '300 per hectare',
-  },
-  {
-    color: '#dd664f',
-    label: '100 per hectare',
-  },
-];
+const currentLayer = ref<string | null>(DEFAULT_LAYER);
 
 function onToggleLayer(layerId: string) {
   mapStore.setVisibleLayer(layerId);

@@ -1,157 +1,73 @@
-import type { Map } from 'maplibre-gl';
-import { Popup } from 'maplibre-gl';
-import { LayerManager } from 'src/layers/models';
-import type { FilterParams } from 'src/stores/filters';
+import { DeSprawlLayerManager } from 'src/layers/commons';
 
-const cdnUrl = 'https://enacit4r-cdn.epfl.ch';
-const mapsUrl = `${cdnUrl}/ehtos-de-sprawl/2026-06-01T10:38/data`;
-
-const PMTILES_2100_URL = `${mapsUrl}/de-sprawl-2100.pmtiles`;
-
-export class DeSprawl2100LayerManager extends LayerManager<FilterParams> {
-  getId(): string {
+export class DeSprawl2100LayerManager extends DeSprawlLayerManager {
+  override getId(): string {
     return 'desprawl2100';
   }
 
-  append(map: Map): void {
-    map.addSource('desprawl2100', {
-      type: 'vector',
-      url: `pmtiles://${PMTILES_2100_URL}`,
-    });
-
-    map.addLayer({
-      id: 'desprawl2100',
-      type: 'fill',
-      source: 'desprawl2100',
-      'source-layer': 'desprawl2100',
-      paint: {
-        'fill-color': [
-          'interpolate',
-          ['linear'],
-          ['get', 'total_score'],
-          50,
-          '#fde725',
-          62,
-          '#5ec962',
-          75,
-          '#21918c',
-          87,
-          '#3b528b',
-          100,
-          '#440154',
-        ],
-        'fill-opacity': 0.8,
-      },
-    });
-
-    // When a click event occurs on a feature in
-    // the unclustered-point layer, open a popup at
-    // the location of the feature, with
-    // description HTML from its properties.
-    map.on('click', 'desprawl2100', (e) => {
-      const feature = e.features ? e.features[0] : null;
-      if (!feature) return;
-      const coordinates = e.lngLat;
-      /*
-        Id : identifiant unique de l'hectare
-        Max_pop : la population maximum qui peut vivre dans un hectare
-        Name : nom de la commune de l'hectare
-        Max_reachable_population : la population totale dans un rayon de 500m de l'hectare en question
-        Grocery/school/healthcare/sports_and_rec/cultural_center/admin/childcare/repairs/elderly_care/mobility : 0 ou 1, indiquant si ce service se trouve dans l'hectare en question
-        Dist_to_[Grocery/school/healthcare/sports_and_rec/cultural_center/admin/childcare/repairs/elderly_care/mobility] : distance entre l'hectare en question et le service le plus proche
-        Score_[Grocery/school/healthcare/sports_and_rec/cultural_center/admin/childcare/repairs/elderly_care/mobility] : score d'accessibilité de l'hectare en question par rapport au service
-        Total_score/accessibility_score_total : score total de l'accessibilité pour l'hectare en question (celui affiché sur la carte à l'aide de couleurs)
-      */
-      const properties = feature.properties;
-      // iterate over properties of interest and display them in the popup
-      const max_pop = properties?.max_pop;
-      const name = properties?.name;
-      const max_reachable_population = properties?.max_reachable_population;
-      const score_grocery = properties?.score_grocery;
-      const score_school = properties?.score_school;
-      const score_healthcare = properties?.score_healthcare;
-      const score_sports_and_rec = properties?.score_sports_and_rec;
-      const score_cultural_center = properties?.score_cultural_center;
-      const score_admin = properties?.score_admin;
-      const score_childcare = properties?.score_childcare;
-      const score_repairs = properties?.score_repairs;
-      const score_elderly_care = properties?.score_elderly_care;
-      const score_mobility = properties?.score_mobility;
-      const total_score = properties?.total_score;
-      // make a html string with the properties of interest
-      const fmt = (v: number | null | undefined) => (v != null ? Number(v).toFixed(2) : '-');
-      const htmlContent = `
-      <div class="q-px-sm">
-        <div class="text-h6">${name}</div>
-        <p class="text-body2 q-mt-sm">Total Score: <b>${fmt(total_score)}</b></p>
-        <table>
-          <tr>
-            <th align="right">Max Population</th>
-            <td>${max_pop || '-'}</td>
-          </tr>
-          <tr>
-            <th align="right">Max Reachable Population</th>
-            <td>${max_reachable_population || '-'}</td>
-          </tr>
-          <tr>
-            <th align="right">Grocery</th>
-            <td>${fmt(score_grocery)}</td>
-          </tr>
-          <tr>
-            <th align="right">School</th>
-            <td>${fmt(score_school)}</td>
-          </tr>
-          <tr>
-            <th align="right">Healthcare</th>
-            <td>${fmt(score_healthcare)}</td>
-          </tr>
-          <tr>
-            <th align="right">Sports and Recreation</th>
-            <td>${fmt(score_sports_and_rec)}</td>
-          </tr>
-          <tr>
-            <th align="right">Cultural Center</th>
-            <td>${fmt(score_cultural_center)}</td>
-          </tr>
-          <tr>
-            <th align="right">Admin</th>
-            <td>${fmt(score_admin)}</td>
-          </tr>
-          <tr>
-            <th align="right">Childcare</th>
-            <td>${fmt(score_childcare)}</td>
-          </tr>
-          <tr>
-            <th align="right">Repairs</th>
-            <td>${fmt(score_repairs)}</td>
-          </tr>
-          <tr>
-            <th align="right">Elderly Care</th>
-            <td>${fmt(score_elderly_care)}</td>
-          </tr>
-          <tr>
-            <th align="right">Mobililty</th>
-            <td>${fmt(score_mobility)}</td>
-          </tr>
-        </table>
-      </div>
-      `;
-      new Popup().setLngLat(coordinates).setHTML(htmlContent).addTo(map);
-    });
+  override getPMTilesBasename(): string {
+    return 'de-sprawl-2100';
   }
 
-  setVisible(map: Map, visible: boolean): void {
-    const visibility = visible ? 'visible' : 'none';
-    ['desprawl2100'].forEach((id) => {
-      map.setLayoutProperty(id, 'visibility', visibility);
-    });
+  /*
+  {
+    "fid": 1,
+    "id": 27234001076900.0,
+    "name": "Chiasso",
+    "max_pop": 208,
+    "max_reachable_pop": 5635.0,
+    "selected": 1.0,
+    "removable": 1.0,
+    "x": 2723400.0,
+    "y": 1076900.0,
+    "grocery": 0.0,
+    "school": 0.0,
+    "healthcare": 0.0,
+    "sports_and_rec": 0.0,
+    "cultural_center": 0.0,
+    "admin": 0.0,
+    "childcare": 0.0,
+    "repairs": 0.0,
+    "elderly_care": 0.0,
+    "mobility": 0.0,
+    "dist_to_grocery": 467.27944530013303,
+    "dist_to_school": 579.58881976794555,
+    "dist_to_healthcare": 467.27944530013303,
+    "dist_to_sports_and_rec": 289.79440988397278,
+    "dist_to_cultural_center": 579.58881976794555,
+    "dist_to_admin": 579.58881976794555,
+    "dist_to_childcare": 409.83118475782203,
+    "dist_to_repairs": 579.58881976794555,
+    "dist_to_elderly_care": 579.58881976794555,
+    "score_grocery": 5.9412709311572236,
+    "score_school": 5.2424205940613522,
+    "score_healthcare": 5.9412709311572236,
+    "score_sports_and_rec": 7.240456196995706,
+    "score_cultural_center": 5.2424205940613522,
+    "score_admin": 5.2424205940613522,
+    "score_childcare": 6.3340148468065873,
+    "score_repairs": 5.2424205940613522,
+    "score_elderly_care": 5.2424205940613522,
+    "total_score": 61.669115876423497,
+    "weighted_avg_klass": 4.0,
+    "mobility_score": 10.0
   }
-
-  filter(map: Map, filters: FilterParams): void {
-    map.setFilter('desprawl2100', [
-      'all',
-      ['>=', ['get', 'total_score'], filters.totalScore[0]],
-      ['<=', ['get', 'total_score'], filters.totalScore[1]],
-    ]);
+  */
+  override getFeaturePropertiesKeysMap() {
+    return {
+      name: 'name',
+      population: 'max_pop',
+      mobility: 'mobility_score',
+      health_care: 'score_healthcare',
+      school: 'score_school',
+      childcare: 'score_childcare',
+      elderly_care: 'score_elderly_care',
+      cultural_center: 'score_cultural_center',
+      nutrition: 'score_grocery',
+      sports_and_rec: 'score_sports_and_rec',
+      public_admin: 'score_admin',
+      repair: 'score_repairs',
+      total: 'total_score',
+    };
   }
 }

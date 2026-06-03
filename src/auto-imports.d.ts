@@ -13,6 +13,7 @@ declare global {
   const $ref: typeof import('vue/macros').$ref
   const $shallowRef: typeof import('vue/macros').$shallowRef
   const $toRef: typeof import('vue/macros').$toRef
+  const DEFAULT_LAYER: typeof import('./stores/map').DEFAULT_LAYER
   const EffectScope: typeof import('vue').EffectScope
   const acceptHMRUpdate: typeof import('pinia').acceptHMRUpdate
   const computed: typeof import('vue').computed
@@ -126,6 +127,7 @@ declare module 'vue' {
     readonly $ref: UnwrapRef<typeof import('vue/macros')['$ref']>
     readonly $shallowRef: UnwrapRef<typeof import('vue/macros')['$shallowRef']>
     readonly $toRef: UnwrapRef<typeof import('vue/macros')['$toRef']>
+    readonly DEFAULT_LAYER: UnwrapRef<typeof import('./stores/map')['DEFAULT_LAYER']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>

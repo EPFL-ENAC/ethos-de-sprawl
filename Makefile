@@ -14,12 +14,7 @@ sync:
 ls:
 	s3cmd ls s3://${bucket}/${folder}/${path}
 
-tiles: tiles-2022 tiles-2023 tiles-2100
-
-tiles-2022:
-	cd data && \
-	rm -f de-sprawl-2022.pmtiles && \
-	tippecanoe -zg -o de-sprawl-2022.pmtiles --no-feature-limit --no-tile-size-limit de-sprawl-2022.geojson
+tiles: tiles-2023 tiles-2100
 
 tiles-2023:
 	cd data && \
