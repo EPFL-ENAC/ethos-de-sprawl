@@ -7,6 +7,9 @@ node_modules
 /dist
 /.quasar
 
+# Large local datasets
+data/
+
 # VCS and editor
 .git
 .gitignore
