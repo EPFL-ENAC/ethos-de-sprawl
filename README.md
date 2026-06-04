@@ -2,36 +2,45 @@
 
 Webmap of De-sprawl Switzerland project by ETHOS lab
 
-## Install the dependencies
+## Development
+
+Install the dependencies
 
 ```bash
 npm install
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+Start the app in development mode (hot-code reloading, error reporting, etc.)
 
 ```bash
-quasar dev
+npm run dev
 ```
 
-### Lint the files
+Lint the files
 
 ```bash
 npm run lint
 ```
 
-### Format the files
+Format the files
 
 ```bash
 npm run format
 ```
 
-### Build the app for production
+Build the app for production:
 
-```bash
-quasar build
-```
+- use `npm version` to update with major/minor/patch version increment
+- commit and push changes to main branch
+- create new Github release vx.x.x and the `deploy` action will take care of deployment
 
-### Customize the configuration
+## Datasets
 
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
+Source datasets are GeoJSON files (use Git LFS to retrieve them). These are to be tiled in PMTiles format following this process:
+
+- Preliminary:
+  - make sure GeoJSON files are in CRS84 format. If not, use QGis to convert.
+  - have [tippecanoe](https://github.com/felt/tippecanoe) installed
+  - if new dataset, update Makefile accordingly
+- Use `make tiles`
+- Then push to EPFL S3 with `make cdn`
