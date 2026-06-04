@@ -57,7 +57,7 @@
           @change="onUpdatedFilter"
           style="margin-top: -12px"
         />
-        <span class="text-help">{{ $t('total_score_help') }}</span>
+        <div class="text-help">{{ $t('total_score_help') }}</div>
       </q-item-section>
     </q-item>
     <q-item>
@@ -78,6 +78,7 @@
           :min="0"
           :max="10"
           :step="1"
+          label
           snap
           color="secondary"
           @change="onUpdatedFilter"
@@ -97,6 +98,7 @@
           :min="0"
           :max="10"
           :step="1"
+          label
           snap
           color="secondary"
           @change="onUpdatedFilter"
@@ -116,6 +118,7 @@
           :min="0"
           :max="10"
           :step="1"
+          label
           snap
           color="secondary"
           @change="onUpdatedFilter"
@@ -135,6 +138,7 @@
           :min="0"
           :max="10"
           :step="1"
+          label
           snap
           color="secondary"
           @change="onUpdatedFilter"
@@ -154,6 +158,7 @@
           :min="0"
           :max="10"
           :step="1"
+          label
           snap
           color="secondary"
           @change="onUpdatedFilter"
@@ -173,6 +178,7 @@
           :min="0"
           :max="10"
           :step="1"
+          label
           snap
           color="secondary"
           @change="onUpdatedFilter"
@@ -192,6 +198,7 @@
           :min="0"
           :max="10"
           :step="1"
+          label
           snap
           color="secondary"
           @change="onUpdatedFilter"
@@ -211,6 +218,7 @@
           :min="0"
           :max="10"
           :step="1"
+          label
           snap
           color="secondary"
           @change="onUpdatedFilter"
@@ -230,6 +238,7 @@
           :min="0"
           :max="10"
           :step="1"
+          label
           snap
           color="secondary"
           @change="onUpdatedFilter"
@@ -249,6 +258,7 @@
           :min="0"
           :max="10"
           :step="1"
+          label
           snap
           color="secondary"
           @change="onUpdatedFilter"
