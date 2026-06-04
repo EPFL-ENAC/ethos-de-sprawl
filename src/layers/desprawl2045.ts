@@ -1,12 +1,12 @@
 import { DeSprawlLayerManager } from 'src/layers/commons';
 
-export class DeSprawl2100LayerManager extends DeSprawlLayerManager {
+export class DeSprawl2045LayerManager extends DeSprawlLayerManager {
   override getId(): string {
-    return 'desprawl2100';
+    return 'desprawl2045';
   }
 
   override getPMTilesBasename(): string {
-    return 'de-sprawl-2100';
+    return 'de-sprawl-2045';
   }
 
   override getFeaturePropertiesKeysMap() {

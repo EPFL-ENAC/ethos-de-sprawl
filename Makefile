@@ -35,6 +35,26 @@ tiles-2023:
 		-y accessibility_score_total \
 	de-sprawl-2023.geojson
 
+
+tiles-2045:
+	cd data && \
+	rm -f de-sprawl-2045.pmtiles && \
+	tippecanoe -zg -o de-sprawl-2045.pmtiles --no-feature-limit --no-tile-size-limit \
+		-y name \
+		-y max_pop \
+		-y mobility_score \
+		-y score_healthcare \
+		-y score_school \
+		-y score_childcare \
+		-y score_elderly_care \
+		-y score_cultural_center \
+		-y score_grocery \
+		-y score_sports_and_rec \
+		-y score_admin \
+		-y score_repairs \
+		-y total_score \
+	de-sprawl-2045.geojson
+
 tiles-2100:
 	cd data && \
 	rm -f de-sprawl-2100.pmtiles && \

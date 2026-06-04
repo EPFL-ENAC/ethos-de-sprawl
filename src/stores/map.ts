@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { DeSprawl2100LayerManager } from 'src/layers/desprawl2100';
+import { DeSprawl2045LayerManager } from 'src/layers/desprawl2045';
 import { DeSprawl2023LayerManager } from 'src/layers/desprawl2023';
 import { type Map } from 'maplibre-gl';
 import { type FilterParams } from 'src/stores/filters';
@@ -14,7 +15,11 @@ export const DEFAULT_LAYER = 'desprawl2100';
 export const useMapStore = defineStore('map', () => {
   const map = ref<Map>();
 
-  const layerManagers = [new DeSprawl2023LayerManager(), new DeSprawl2100LayerManager()];
+  const layerManagers = [
+    new DeSprawl2023LayerManager(),
+    new DeSprawl2045LayerManager(),
+    new DeSprawl2100LayerManager(),
+  ];
 
   const layerSelections: LayerSelection[] = layerManagers.map((lm) => ({
     id: lm.getId(),

@@ -8,6 +8,7 @@ export default {
   it4r_contrib: 'UI/UX design, application development and deployment',
   layer: {
     desprawl2100: '2100',
+    desprawl2045: '2045',
     desprawl2023: '2023',
   },
   layers: 'Layers',
