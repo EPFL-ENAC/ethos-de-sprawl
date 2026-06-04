@@ -14,9 +14,10 @@ export default {
   legends: 'Legends',
   home: 'Home',
   introduction: 'Introduction',
-  total_score: 'Total Score',
-  total_score_help: 'Select the range of total scores.',
-  total_score_legend: 'Total score',
+  total_score: 'Total Accessibility Score',
+  total_score_help: 'Select the range of total accessibility scores.',
+  total_score_legend:
+    'A score that rates accessibility within an 8-minute walk to 10 essential services (groceries, health care, childcare, elderly care, school, public administration, cultural center, recreation and sports, repair service, and public transport).',
   reset_filters: 'Reset filters',
   resources: 'Resources',
   source_code: 'Source Code',

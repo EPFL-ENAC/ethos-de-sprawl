@@ -40,25 +40,45 @@ export class DeSprawlLayerManager extends LayerManager<FilterParams> {
 
   getFeaturePropertiesMap(feature: {
     properties: Record<string, unknown>;
-  }): Record<string, string> {
+  }): Record<string, string | undefined> {
     const properties = feature.properties;
     const keys = this.getFeaturePropertiesKeysMap();
     return {
-      name: String(properties[keys.name]),
-      population: String(properties[keys.population]),
-      score_grocery: this.fmt(properties[keys.nutrition] as number | null | undefined),
-      score_school: this.fmt(properties[keys.school] as number | null | undefined),
-      score_healthcare: this.fmt(properties[keys.health_care] as number | null | undefined),
-      score_sports_and_rec: this.fmt(properties[keys.sports_and_rec] as number | null | undefined),
-      score_cultural_center: this.fmt(
-        properties[keys.cultural_center] as number | null | undefined,
-      ),
-      score_admin: this.fmt(properties[keys.public_admin] as number | null | undefined),
-      score_childcare: this.fmt(properties[keys.childcare] as number | null | undefined),
-      score_repairs: this.fmt(properties[keys.repair] as number | null | undefined),
-      score_elderly_care: this.fmt(properties[keys.elderly_care] as number | null | undefined),
-      score_mobility: this.fmt(properties[keys.mobility] as number | null | undefined),
-      total_score: this.fmt(properties[keys.total] as number | null | undefined),
+      name: properties[keys.name] ? String(properties[keys.name]) : undefined,
+      population: properties[keys.population] ? String(properties[keys.population]) : undefined,
+      score_grocery: properties[keys.nutrition]
+        ? this.fmt(properties[keys.nutrition] as number | null | undefined)
+        : undefined,
+      score_school: properties[keys.school]
+        ? this.fmt(properties[keys.school] as number | null | undefined)
+        : undefined,
+      score_healthcare: properties[keys.health_care]
+        ? this.fmt(properties[keys.health_care] as number | null | undefined)
+        : undefined,
+      score_sports_and_rec: properties[keys.sports_and_rec]
+        ? this.fmt(properties[keys.sports_and_rec] as number | null | undefined)
+        : undefined,
+      score_cultural_center: properties[keys.cultural_center]
+        ? this.fmt(properties[keys.cultural_center] as number | null | undefined)
+        : undefined,
+      score_admin: properties[keys.public_admin]
+        ? this.fmt(properties[keys.public_admin] as number | null | undefined)
+        : undefined,
+      score_childcare: properties[keys.childcare]
+        ? this.fmt(properties[keys.childcare] as number | null | undefined)
+        : undefined,
+      score_repairs: properties[keys.repair]
+        ? this.fmt(properties[keys.repair] as number | null | undefined)
+        : undefined,
+      score_elderly_care: properties[keys.elderly_care]
+        ? this.fmt(properties[keys.elderly_care] as number | null | undefined)
+        : undefined,
+      score_mobility: properties[keys.mobility]
+        ? this.fmt(properties[keys.mobility] as number | null | undefined)
+        : undefined,
+      total_score: properties[keys.total]
+        ? this.fmt(properties[keys.total] as number | null | undefined)
+        : undefined,
     };
   }
 
@@ -92,70 +112,62 @@ export class DeSprawlLayerManager extends LayerManager<FilterParams> {
       const feature = e.features ? e.features[0] : null;
       if (!feature) return;
       const coordinates = e.lngLat;
-      /*
-        Id : identifiant unique de l'hectare
-        Max_pop : la population maximum qui peut vivre dans un hectare
-        Name : nom de la commune de l'hectare
-        Max_reachable_population : la population totale dans un rayon de 500m de l'hectare en question
-        Grocery/school/healthcare/sports_and_rec/cultural_center/admin/childcare/repairs/elderly_care/mobility : 0 ou 1, indiquant si ce service se trouve dans l'hectare en question
-        Dist_to_[Grocery/school/healthcare/sports_and_rec/cultural_center/admin/childcare/repairs/elderly_care/mobility] : distance entre l'hectare en question et le service le plus proche
-        Score_[Grocery/school/healthcare/sports_and_rec/cultural_center/admin/childcare/repairs/elderly_care/mobility] : score d'accessibilité de l'hectare en question par rapport au service
-        Total_score/accessibility_score_total : score total de l'accessibilité pour l'hectare en question (celui affiché sur la carte à l'aide de couleurs)
-      */
       const propertiesMap = this.getFeaturePropertiesMap(feature);
-      // make a html string with the properties of interest
-      const htmlContent = `
-      <div class="q-px-sm">
-        <div class="text-h6">${propertiesMap.name}</div>
+      const popupContent = document.createElement('div');
+      popupContent.className = 'q-px-sm';
 
-        <p class="text-body2 q-mt-sm q-mb-none">Population: <b>${propertiesMap.population || '-'}</b></p>
-        <hr/>
-        <p class="text-body2 q-mt-none q-mb-sm">Total Score: <b>${propertiesMap.total_score}</b></p>
-        <table>
-          <tr>
-            <th align="right">Grocery</th>
-            <td>${propertiesMap.score_grocery}</td>
-          </tr>
-          <tr>
-            <th align="right">School</th>
-            <td>${propertiesMap.score_school}</td>
-          </tr>
-          <tr>
-            <th align="right">Healthcare</th>
-            <td>${propertiesMap.score_healthcare}</td>
-          </tr>
-          <tr>
-            <th align="right">Sports and Recreation</th>
-            <td>${propertiesMap.score_sports_and_rec}</td>
-          </tr>
-          <tr>
-            <th align="right">Cultural Center</th>
-            <td>${propertiesMap.score_cultural_center}</td>
-          </tr>
-          <tr>
-            <th align="right">Admin</th>
-            <td>${propertiesMap.score_admin}</td>
-          </tr>
-          <tr>
-            <th align="right">Childcare</th>
-            <td>${propertiesMap.score_childcare}</td>
-          </tr>
-          <tr>
-            <th align="right">Repairs</th>
-            <td>${propertiesMap.score_repairs}</td>
-          </tr>
-          <tr>
-            <th align="right">Elderly Care</th>
-            <td>${propertiesMap.score_elderly_care}</td>
-          </tr>
-          <tr>
-            <th align="right">Mobililty</th>
-            <td>${propertiesMap.score_mobility}</td>
-          </tr>
-        </table>
-      </div>
-      `;
-      new Popup().setLngLat(coordinates).setHTML(htmlContent).addTo(map);
+      if (propertiesMap.name) {
+        const title = document.createElement('div');
+        title.className = 'text-h6';
+        title.textContent = propertiesMap.name;
+        popupContent.appendChild(title);
+      }
+
+      const population = document.createElement('p');
+      population.className = 'text-body2 q-mt-sm q-mb-none';
+      population.innerHTML = `Population: <b>${propertiesMap.population || '-'}</b>`;
+      popupContent.appendChild(population);
+
+      const separator = document.createElement('hr');
+      popupContent.appendChild(separator);
+
+      const totalScore = document.createElement('p');
+      totalScore.className = 'text-body2 q-mt-none q-mb-sm';
+      totalScore.innerHTML = `Total Score: <b>${propertiesMap.total_score}</b>`;
+      popupContent.appendChild(totalScore);
+
+      const table = document.createElement('table');
+      const rows = [
+        ['Grocery', propertiesMap.score_grocery],
+        ['School', propertiesMap.score_school],
+        ['Healthcare', propertiesMap.score_healthcare],
+        ['Sports and Recreation', propertiesMap.score_sports_and_rec],
+        ['Cultural Center', propertiesMap.score_cultural_center],
+        ['Admin', propertiesMap.score_admin],
+        ['Childcare', propertiesMap.score_childcare],
+        ['Repairs', propertiesMap.score_repairs],
+        ['Elderly Care', propertiesMap.score_elderly_care],
+        ['Mobililty', propertiesMap.score_mobility],
+      ];
+
+      for (const [label, value] of rows) {
+        const row = document.createElement('tr');
+
+        const header = document.createElement('th');
+        header.setAttribute('align', 'right');
+        header.textContent = label || '-';
+
+        const cell = document.createElement('td');
+        cell.textContent = value || '-';
+
+        row.appendChild(header);
+        row.appendChild(cell);
+        table.appendChild(row);
+      }
+
+      popupContent.appendChild(table);
+
+      new Popup().setLngLat(coordinates).setDOMContent(popupContent).addTo(map);
     });
   }
 

@@ -39,7 +39,7 @@ export class DeSprawl2023LayerManager extends DeSprawlLayerManager {
   */
   override getFeaturePropertiesKeysMap() {
     return {
-      name: 'id',
+      name: 'name',
       population: 'population',
       mobility: 'accessibility_score_mobility',
       health_care: 'accessibility_score_health_care',

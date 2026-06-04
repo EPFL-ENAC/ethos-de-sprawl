@@ -21,25 +21,31 @@
     </template>
     <q-item>
       <q-item-section>
-        <span>{{ $t('total_score') }}</span>
+        <div class="text-bold">{{ $t('total_score') }}</div>
+        <div class="text-caption">{{ $t('total_score_legend') }}</div>
+        <div class="row q-mt-sm">
+          <template v-for="[label, color] in Object.entries(COLOR_SCALE)" :key="color">
+            <div
+              class="col"
+              :style="`background-color: ${color}; width: 100%; height: 20px;`"
+              :title="$t(label)"
+            ></div>
+          </template>
+        </div>
         <q-range
           v-model="filtersStore.totalScore"
           :min="0"
           :max="100"
           :step="1"
-          label
+          label-always
+          thumb-size="25px"
           snap
           color="primary"
           @change="onUpdatedFilter"
+          style="margin-top: -12px"
         />
         <span class="text-help">{{ $t('total_score_help') }}</span>
       </q-item-section>
-    </q-item>
-    <q-item v-for="[label, color] in Object.entries(COLOR_SCALE)" :key="color">
-      <q-item-section avatar>
-        <q-avatar size="sm" :style="`background-color: ${color}`" text-color="black" />
-      </q-item-section>
-      <q-item-section>{{ $t(label) }}</q-item-section>
     </q-item>
     <q-item>
       <q-btn
