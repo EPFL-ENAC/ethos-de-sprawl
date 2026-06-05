@@ -14,6 +14,9 @@ sync:
 ls:
 	s3cmd ls s3://${bucket}/${folder}/${path}
 
+rm:
+	s3cmd del --recursive s3://${bucket}/${folder}/${path}
+
 tiles: tiles-2023 tiles-2100
 
 tiles-2023:
