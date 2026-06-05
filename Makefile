@@ -20,7 +20,7 @@ tiles-2023:
 	cd data && \
 	rm -f de-sprawl-2023.pmtiles && \
 	tippecanoe -zg -o de-sprawl-2023.pmtiles --no-feature-limit --no-tile-size-limit \
-		-y id \
+		-y name \
 		-y population \
 		-y accessibility_score_mobility \
 		-y accessibility_score_health_care \
