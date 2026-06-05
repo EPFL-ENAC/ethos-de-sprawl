@@ -17,7 +17,7 @@ ls:
 rm:
 	s3cmd del --recursive s3://${bucket}/${folder}/${path}
 
-tiles: tiles-2023 tiles-2100
+tiles: tiles-2023 tiles-2045 tiles-2100
 
 tiles-2023:
 	cd data && \
