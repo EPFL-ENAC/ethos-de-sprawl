@@ -26,12 +26,15 @@ import '@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css';
 import 'maplibregl-theme-switcher/styles.css';
 import MaplibreGeocoder from '@maplibre/maplibre-gl-geocoder';
 import * as maplibregl from 'maplibre-gl';
+// maplibre-gl v6 is ESM-only; under a bundler the worker URL must be wired up explicitly.
+// '?worker&url' (not plain '?url') is required so Vite emits a self-contained worker chunk
+// that includes its 'maplibre-gl-shared.mjs' sibling.
+import maplibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 import { ThemeSwitcherControl, type ThemeDefinition } from 'maplibregl-theme-switcher';
 import {
   AttributionControl,
   FullscreenControl,
   GeolocateControl,
-  type IControl,
   Map,
   type MapOptions,
   type MapMouseEvent,
@@ -40,11 +43,14 @@ import {
   type LngLatLike,
   type StyleSpecification,
   addProtocol,
+  setWorkerUrl,
 } from 'maplibre-gl';
-import { DivControl } from 'src/utils/control';
-import { geocoderApi } from 'src/utils/geocoder';
-import { type Settings } from 'src/stores/settings';
+import { DivControl } from '@/utils/control';
+import { geocoderApi } from '@/utils/geocoder';
+import { type Settings } from '@/stores/settings';
 import { Protocol } from 'pmtiles';
+
+setWorkerUrl(maplibreWorkerUrl);
 
 const protocol = new Protocol();
 addProtocol('pmtiles', protocol.tile);
@@ -134,7 +140,7 @@ onMounted(() => {
           return false;
         },
       },
-    }) as unknown as IControl,
+    }),
   );
 
   map.addControl(
@@ -147,7 +153,7 @@ onMounted(() => {
   if (props.geocoder === true || props.geocoder === 'true') {
     map.addControl(
       new MaplibreGeocoder(geocoderApi, {
-        maplibregl: maplibregl as never,
+        maplibregl,
         showResultsWhileTyping: true,
         language: locale.value,
       }),
@@ -156,7 +162,7 @@ onMounted(() => {
   }
 
   map.on('click', (event: MapMouseEvent) => {
-    emit('map:click', event, map as Map);
+    emit('map:click', event, map);
   });
 
   if (props.position === true || props.position === 'true') {
@@ -178,7 +184,7 @@ onMounted(() => {
     THEMES.map((th) => th.id).forEach((id) => {
       map?.setLayoutProperty(id, 'visibility', id === currentTheme ? 'visible' : 'none');
     });
-    emit('map:loaded', map as Map);
+    emit('map:loaded', map);
     loading.value = false;
   });
 });

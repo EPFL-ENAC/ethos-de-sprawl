@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia';
-import { DeSprawl2100LayerManager } from 'src/layers/desprawl2100';
-import { DeSprawl2045LayerManager } from 'src/layers/desprawl2045';
-import { DeSprawl2023LayerManager } from 'src/layers/desprawl2023';
+import { DeSprawl2100LayerManager } from '@/layers/desprawl2100';
+import { DeSprawl2045LayerManager } from '@/layers/desprawl2045';
+import { DeSprawl2023LayerManager } from '@/layers/desprawl2023';
 import { type Map } from 'maplibre-gl';
-import { type FilterParams } from 'src/stores/filters';
+import { type FilterParams } from '@/stores/filters';
 
 export type LayerSelection = {
   id: string;

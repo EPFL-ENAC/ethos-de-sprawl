@@ -39,9 +39,9 @@
 </template>
 
 <script setup lang="ts">
-import AppToolbar from 'src/components/AppToolbar.vue';
-import LayersDrawer from 'src/components/LayersDrawer.vue';
-import HelpDrawer from 'src/components/HelpDrawer.vue';
+import AppToolbar from '@/components/AppToolbar.vue';
+import LayersDrawer from '@/components/LayersDrawer.vue';
+import HelpDrawer from '@/components/HelpDrawer.vue';
 
 const helpStore = useHelpStore();
 

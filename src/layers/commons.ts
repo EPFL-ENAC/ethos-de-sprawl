@@ -1,8 +1,8 @@
 import type { Map } from 'maplibre-gl';
 import { Popup } from 'maplibre-gl';
-import { LayerManager } from 'src/layers/models';
-import type { FilterParams } from 'src/stores/filters';
-import { getColorScalePaint } from 'src/utils/constants';
+import { LayerManager } from '@/layers/models';
+import type { FilterParams } from '@/stores/filters';
+import { getColorScalePaint } from '@/utils/constants';
 
 const cdnUrl = 'https://enacit4r-cdn.epfl.ch';
 const mapsUrl = `${cdnUrl}/ehtos-de-sprawl/2026-06-06T16:35/data`;

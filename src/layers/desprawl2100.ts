@@ -1,4 +1,4 @@
-import { DeSprawlLayerManager } from 'src/layers/commons';
+import { DeSprawlLayerManager } from '@/layers/commons';
 
 export class DeSprawl2100LayerManager extends DeSprawlLayerManager {
   override getId(): string {

@@ -269,7 +269,7 @@
 </template>
 
 <script setup lang="ts">
-import { COLOR_SCALE } from 'src/utils/constants';
+import { COLOR_SCALE } from '@/utils/constants';
 
 const mapStore = useMapStore();
 const helpStore = useHelpStore();
