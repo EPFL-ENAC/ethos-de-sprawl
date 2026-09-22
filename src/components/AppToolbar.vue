@@ -77,11 +77,10 @@ export default defineComponent({
 });
 </script>
 <script setup lang="ts">
-import IntroductionEnMd from 'src/assets/introduction-en.md';
-import essentialLinks from 'src/assets/links.json';
-import EssentialLink from 'src/components/EssentialLink.vue';
-import SimpleDialog from 'src/components/SimpleDialog.vue';
-import { type Settings } from 'src/stores/settings';
+import IntroductionEnMd from '@/assets/introduction-en.md';
+import essentialLinks from '@/assets/links.json';
+import EssentialLink from '@/components/EssentialLink.vue';
+import SimpleDialog from '@/components/SimpleDialog.vue';
 
 interface Props {
   noMenu?: boolean;
@@ -100,7 +99,7 @@ const showResources = ref(false);
 onMounted(() => {
   if (!settingsStore.settings?.intro_shown) {
     showIntro.value = true;
-    settingsStore.saveSettings({ intro_shown: true } as Settings);
+    settingsStore.saveSettings({ intro_shown: true });
   }
 });
 

@@ -15,7 +15,7 @@
 </style>
 
 <script setup lang="ts">
-import MaplibreMap from 'components/MaplibreMap.vue';
+import MaplibreMap from '@/components/MaplibreMap.vue';
 import type { Map, MapMouseEvent } from 'maplibre-gl';
 
 const mapStore = useMapStore();
