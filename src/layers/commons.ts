@@ -5,7 +5,7 @@ import type { FilterParams } from '@/stores/filters';
 import { getColorScalePaint } from '@/utils/constants';
 
 const cdnUrl = 'https://enacit4r-cdn.epfl.ch';
-const mapsUrl = `${cdnUrl}/ehtos-de-sprawl/2026-06-06T16:35/data`;
+export const mapsUrl = `${cdnUrl}/ehtos-de-sprawl/2026-09-24T15:15/data`;
 
 export class DeSprawlLayerManager extends LayerManager<FilterParams> {
   getId(): string {
@@ -111,6 +111,8 @@ export class DeSprawlLayerManager extends LayerManager<FilterParams> {
     map.on('click', layerId, (e) => {
       const feature = e.features ? e.features[0] : null;
       if (!feature) return;
+      // let layers drawn on top (e.g. service points) handle their own clicks
+      if (map.queryRenderedFeatures(e.point)[0]?.layer.id !== layerId) return;
       const coordinates = e.lngLat;
       const propertiesMap = this.getFeaturePropertiesMap(feature);
       const popupContent = document.createElement('div');

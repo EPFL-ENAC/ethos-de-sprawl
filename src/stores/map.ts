@@ -4,6 +4,7 @@ import { DeSprawl2045LayerManager } from '@/layers/desprawl2045';
 import { DeSprawl2023LayerManager } from '@/layers/desprawl2023';
 import { type Map } from 'maplibre-gl';
 import { type FilterParams } from '@/stores/filters';
+import { appendServices, showServices } from '@/layers/services';
 
 export type LayerSelection = {
   id: string;
@@ -21,6 +22,8 @@ export const useMapStore = defineStore('map', () => {
     new DeSprawl2100LayerManager(),
   ];
 
+  const selectedServices = ref<string[]>([]);
+
   const layerSelections: LayerSelection[] = layerManagers.map((lm) => ({
     id: lm.getId(),
     visible: lm.getId() === DEFAULT_LAYER, // only the default layer is visible by default
@@ -35,6 +38,34 @@ export const useMapStore = defineStore('map', () => {
         manager.setVisible(map.value, layer.visible);
       }
     });
+    applyServices();
+  }
+
+  /**
+   * Year of the visible layer, e.g. 'desprawl2045' -> '2045'.
+   */
+  function getYear() {
+    return layerSelections.find((l) => l.visible)?.id.replace('desprawl', '');
+  }
+
+  /**
+   * Show or hide a service, for the year of the visible layer.
+   * @param id the service identifier
+   */
+  function toggleService(id: string) {
+    selectedServices.value = selectedServices.value.includes(id)
+      ? selectedServices.value.filter((s) => s !== id)
+      : [...selectedServices.value, id];
+    applyServices();
+  }
+
+  function clearServices() {
+    selectedServices.value = [];
+    applyServices();
+  }
+
+  function applyServices() {
+    if (map.value) showServices(map.value, getYear(), selectedServices.value);
   }
 
   /**
@@ -80,7 +111,7 @@ export const useMapStore = defineStore('map', () => {
    * @param mapInstance the map instance
    * @returns
    */
-  function initLayers(mapInstance: Map) {
+  function initLayers(mapInstance: Map, serviceLabel: (service: string) => string) {
     map.value = mapInstance;
     layerSelections.map((layer) => {
       const manager = getLayerManager(layer.id);
@@ -88,6 +119,9 @@ export const useMapStore = defineStore('map', () => {
       manager.append(mapInstance);
       manager.setVisible(mapInstance, layer.visible);
     });
+    // added last so that service points are drawn above the score polygons
+    appendServices(mapInstance, serviceLabel);
+    applyServices();
   }
 
   /**
@@ -102,6 +136,10 @@ export const useMapStore = defineStore('map', () => {
   return {
     map,
     layerSelections,
+    selectedServices,
+    getYear,
+    toggleService,
+    clearServices,
     applyFilters,
     applyLayerVisibility,
     initLayers,

@@ -18,7 +18,42 @@
           <q-btn flat round icon="help_outline" @click="helpStore.toggleHelp(layer.id)" />
         </q-item-section>
       </q-item>
-    </template>
+"    </template>
+    <q-item-label header class="text-h6">
+      <q-icon name="place" class="q-pb-xs" />
+      <span class="q-ml-sm">{{ $t('services') }}</span>
+      <q-btn
+        flat
+        no-caps
+        color="primary"
+        size="10px"
+        icon="clear"
+        :label="$t('clear_services')"
+        :disable="!mapStore.selectedServices.length"
+        @click="mapStore.clearServices()"
+        class="q-pl-xs q-pr-xs float-right"
+      />
+    </q-item-label>
+    <q-item>
+      <q-item-section>
+        <div>
+          <q-chip
+            v-for="service in SERVICES"
+            :key="service"
+            clickable
+            dense
+            :outline="!mapStore.selectedServices.includes(service)"
+            :disable="!servicesAvailable"
+            :aria-pressed="mapStore.selectedServices.includes(service)"
+            @click="mapStore.toggleService(service)"
+          >
+            <span class="q-mr-xs" :style="`color: ${SERVICE_COLORS[service]}`">●</span>
+            {{ $t(`service.${service}`) }}
+          </q-chip>
+        </div>
+        <div v-if="!servicesAvailable" class="text-help">{{ $t('services_unavailable') }}</div>
+      </q-item-section>
+    </q-item>
     <q-item-label header class="text-h6">
       <q-icon name="filter_list" class="q-pb-xs" />
       <span class="q-ml-sm">{{ $t('filters') }}</span>
@@ -270,12 +305,16 @@
 
 <script setup lang="ts">
 import { COLOR_SCALE } from '@/utils/constants';
+import { SERVICES, SERVICE_COLORS, SERVICE_YEARS } from '@/layers/services';
 
 const mapStore = useMapStore();
 const helpStore = useHelpStore();
 const filtersStore = useFiltersStore();
 
 const currentLayer = ref<string | null>(DEFAULT_LAYER);
+const servicesAvailable = computed(() =>
+  SERVICE_YEARS.includes(currentLayer.value?.replace('desprawl', '') ?? ''),
+);
 
 function onToggleLayer(layerId: string) {
   mapStore.setVisibleLayer(layerId);

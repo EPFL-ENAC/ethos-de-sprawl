@@ -17,6 +17,14 @@ ls:
 rm:
 	s3cmd del --recursive s3://${bucket}/${folder}/${path}
 
+tiles-services:
+	cd data/services && \
+	rm -f *.pmtiles && \
+	for f in *.geojson; do \
+		tippecanoe -zg -r1 -o $${f%.geojson}.pmtiles --no-feature-limit --no-tile-size-limit \
+		$$f; \
+	done
+
 tiles: tiles-2023 tiles-2045 tiles-2100
 
 tiles-2023:

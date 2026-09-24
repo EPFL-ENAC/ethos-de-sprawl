@@ -18,11 +18,12 @@
 import MaplibreMap from '@/components/MaplibreMap.vue';
 import type { Map, MapMouseEvent } from 'maplibre-gl';
 
+const { t } = useI18n({ useScope: 'global' });
 const mapStore = useMapStore();
 const filtersStore = useFiltersStore();
 
 function onMapLoaded(map: Map) {
-  mapStore.initLayers(map);
+  mapStore.initLayers(map, (service) => t(`service.${service}`));
   mapStore.applyFilters(filtersStore.asParams());
 }
 
